@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/jmaclellan/part3_fullstackopen/issues"
   },
-  "homepage": "https://github.com/jmaclellan/part3_fullstackopen#readme"
+  "homepage": "https://github.com/jmaclellan/part3_fullstackopen#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
