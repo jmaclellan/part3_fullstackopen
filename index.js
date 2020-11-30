@@ -27,6 +27,9 @@ let persons = [
   },
 ]
 
+// generate id function
+const generateId = () => Math.floor(Math.random() * 1000000)
+
 // route to get all people
 app.get('/api/persons', (req, res) => {
   res.json(persons)
@@ -53,9 +56,43 @@ app.get('/api/persons/:id', (request, response) => {
 // route to delete person
 app.delete('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
-  persons = persons.filter(person => person.id === id)
+  persons = persons.filter(p => p.id === id)
 
   response.status(204).end()
+})
+
+// route to add new person
+app.post('/api/persons', (request, response) => {
+  const { body } = request
+
+  // error checks
+  if (!body.name) {
+    return response.status(400).json({
+      error: 'Name is missing',
+    })
+  }
+
+  if (!body.number) {
+    return response.status(400).json({
+      error: 'Number is missing',
+    })
+  }
+
+  if (persons.map(p => p.name === body.name)) {
+    return response.status(400).json({
+      error: 'Name must be unique',
+    })
+  }
+
+  const person = {
+    id: generateId(),
+    name: body.name,
+    number: body.number,
+  }
+
+  persons = [...persons, person]
+
+  response.json(person)
 })
 
 // Expand the backend so that new phonebook entries can be added by making HTTP POST requests to the address http://localhost:3001/api/persons.
