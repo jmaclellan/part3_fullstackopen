@@ -27,14 +27,27 @@ const persons = [
   },
 ]
 
+// route to get all people
 app.get('/api/persons', (req, res) => {
   res.json(persons)
 })
 
+// route to get phonebook length & current date/time
 app.get('/info', (req, res) => {
   const phonebookLength = `Phonebook has info for ${persons.length} people`
   const currentDate = new Date()
   res.send(`<div>${phonebookLength}</div> <div>${currentDate}</div>`)
+})
+
+// route to get person by id
+app.get('/api/persons/:id', (request, response) => {
+  const id = Number(request.params.id)
+  const person = persons.find(person => person.id === id)
+  if (person) {
+    response.json(person)
+  } else {
+    response.status(404).end()
+  }
 })
 
 const PORT = 3001
