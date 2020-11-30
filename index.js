@@ -36,7 +36,7 @@ app.get('/api/persons', (req, res) => {
 app.get('/info', (req, res) => {
   const phonebookLength = `Phonebook has info for ${persons.length} people`
   const currentDate = new Date()
-  res.send(`<div>${phonebookLength}</div> <div>${currentDate}</div>`)
+  res.send(`<p>${phonebookLength}</p><p>${currentDate}</p>`)
 })
 
 // route to get person by id
