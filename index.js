@@ -45,7 +45,7 @@ app.get('/info', (req, res) => {
 // route to get person by id
 app.get('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
-  const person = persons.find(person => person.id === id)
+  const person = persons.find(p => p.id === id)
   if (person) {
     response.json(person)
   } else {
