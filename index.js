@@ -51,12 +51,16 @@ app.get('/api/persons/:id', (request, response) => {
 })
 
 // route to delete person
-app.delete('/api/person/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
   persons = persons.filter(person => person.id === id)
 
   response.status(204).end()
 })
+
+// Expand the backend so that new phonebook entries can be added by making HTTP POST requests to the address http://localhost:3001/api/persons.
+
+// Generate a new id for the phonebook entry with the Math.random function. Use a big enough range for your random values so that the likelihood of creating duplicate ids is small.
 
 const PORT = 3001
 app.listen(PORT, () => {
