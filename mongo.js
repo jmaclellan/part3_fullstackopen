@@ -30,20 +30,22 @@ if (process.argv.length === 3) {
   console.log('phonebook:')
   Person.find({}).then(result => {
     result.forEach(contact => {
-      console.log(contact)
+      console.log(`${contact.name} ${contact.number}`)
     })
     mongoose.connection.close()
   })
 }
 
-// name and number from CLI
-const person = new Person({
-  name: process.argv[3],
-  number: process.argv[4],
-})
+if (process.argv.length === 5) {
+  // name and number from CLI
+  const person = new Person({
+    name: process.argv[3],
+    number: process.argv[4],
+  })
 
-// save person to database
-person.save().then(result => {
-  console.log(`added ${person.name} number ${person.number} to phonebook`)
-  mongoose.connection.close()
-})
+  // save person to database
+  person.save().then(result => {
+    console.log(`added ${person.name} number ${person.number} to phonebook`)
+    mongoose.connection.close()
+  })
+}
