@@ -20,7 +20,7 @@ mongoose.connect(url, {
 
 const personSchema = new mongoose.Schema({
   name: String,
-  number: Number,
+  number: String,
 })
 
 const Person = mongoose.model('Person', personSchema)
@@ -44,7 +44,6 @@ const person = new Person({
 
 // save person to database
 person.save().then(result => {
-  console.log(`added ${person.name} number ${person.number} to phonebook
-  `)
+  console.log(`added ${person.name} number ${person.number} to phonebook`)
   mongoose.connection.close()
 })
