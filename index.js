@@ -5,7 +5,6 @@ require('dotenv').config()
 
 const morgan = require('morgan')
 const cors = require('cors')
-const { response } = require('express')
 const Person = require('./models/person')
 
 app.use(cors())
@@ -40,17 +39,17 @@ let persons = [
 const generateId = () => Math.floor(Math.random() * 1000000)
 
 // route to get all people
-app.get('/api/persons', (req, res) => {
+app.get('/api/persons', (request, response) => {
   Person.find({}).then(persons => {
-    res.json(persons.map(person => person.toJSON()))
+    response.json(persons.map(person => person.toJSON()))
   })
 })
 
 // route to get phonebook length & current date/time
-app.get('/info', (req, res) => {
+app.get('/info', (request, response) => {
   const phonebookLength = `Phonebook has info for ${Person.length} people`
   const currentDate = new Date()
-  res.send(`<p>${phonebookLength}</p><p>${currentDate}</p>`)
+  response.send(`<p>${phonebookLength}</p><p>${currentDate}</p>`)
 })
 
 // route to get person by id
