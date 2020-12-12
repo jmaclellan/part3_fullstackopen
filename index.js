@@ -40,12 +40,12 @@ const generateId = () => Math.floor(Math.random() * 1000000)
 
 // route to get all people
 app.get('/api/persons', (req, res) => {
-  res.json(persons)
+  res.json(Person)
 })
 
 // route to get phonebook length & current date/time
 app.get('/info', (req, res) => {
-  const phonebookLength = `Phonebook has info for ${persons.length} people`
+  const phonebookLength = `Phonebook has info for ${Person.length} people`
   const currentDate = new Date()
   res.send(`<p>${phonebookLength}</p><p>${currentDate}</p>`)
 })
