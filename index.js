@@ -40,8 +40,8 @@ const generateId = () => Math.floor(Math.random() * 1000000)
 
 // route to get all people
 app.get('/api/persons', (request, response) => {
-  Person.find({}).then(persons => {
-    response.json(persons.map(person => person.toJSON()))
+  Person.find({}).then(personsList => {
+    response.json(personsList.map(person => person.toJSON()))
   })
 })
 
