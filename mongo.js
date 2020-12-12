@@ -36,6 +36,7 @@ if (process.argv.length === 3) {
   })
 }
 
+// to add new contact to phonebook
 if (process.argv.length === 5) {
   // name and number from CLI
   const person = new Person({
