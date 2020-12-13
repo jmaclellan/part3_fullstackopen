@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(express.static('build'))
 app.use(morgan('tiny'))
 
-let persons = [
+const persons = [
   {
     id: 1,
     name: 'Arto Hellas',
@@ -60,11 +60,12 @@ app.get('/api/persons/:id', (request, response) => {
 })
 
 // route to delete person
-app.delete('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  persons = persons.filter(p => p.id !== id)
-
-  response.status(204).end()
+app.delete('/api/persons/:id', (request, response, next) => {
+  Person.findByIdAndRemove(request.params.id)
+    .then(result => {
+      response.status(204).end()
+    })
+    .catch(error => next(error))
 })
 
 // route to add new person
