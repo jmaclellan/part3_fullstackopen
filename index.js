@@ -52,7 +52,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
 })
 
 // route to add new person
-app.post('/api/persons', (request, response) => {
+app.put('/api/persons', (request, response) => {
   const { body } = request
 
   // error checks
@@ -68,12 +68,12 @@ app.post('/api/persons', (request, response) => {
     })
   }
 
-  // if name already exists
-  if (persons.find(p => p.name === body.name)) {
-    return response.status(400).json({
-      error: 'Name must be unique',
-    })
-  }
+  // earlier section, when checking for unique name
+  // if (persons.find(p => p.name === body.name)) {
+  //   return response.status(400).json({
+  //     error: 'Name must be unique',
+  //   })
+  // }
 
   const person = new Person({
     id: generateId(),
