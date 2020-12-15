@@ -24,10 +24,12 @@ app.get('/api/persons', (request, response) => {
 
 // route to get phonebook length & current date/time
 app.get('/info', (request, response) => {
-  const phonebookLength = `Phonebook has info for ${Person.length} people`
   const currentDate = new Date()
-  response.send(`<p>${phonebookLength}</p><p>${currentDate}</p>`)
+  Person.find({}).then(person => {
+    response.send(`<p>Phonebook has info for ${person.length} people</p><p>${currentDate}</p>`)
+  })
 })
+
 
 // route to get person by id
 app.get('/api/persons/:id', (request, response, next) => {
